@@ -1,19 +1,55 @@
-{% extends "base.html" %}
-{% block title %}{{ course.title }}{% endblock %}
-{% block content %}
-<section class="hero compact">
-  <span class="eyebrow">COURSE</span>
-  <h1>{{ course.title }}</h1>
-  <p>{{ course.description }}</p>
-</section>
-<section class="panel">
-  <h2>Lessons</h2>
-  <ol class="lesson-list">
-    {% for lesson in lessons %}
-      <li><a href="{{ url_for('lesson_detail', lesson_id=lesson.id) }}">{{ lesson.title }}</a></li>
-    {% else %}
-      <li>No lessons have been added yet.</li>
-    {% endfor %}
-  </ol>
-</section>
-{% endblock %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Medical Ethics: Foundations | Medical Ethics LMS</title>
+
+    <link rel="stylesheet" href="static/css/style.css">
+</head>
+
+<body>
+
+<header class="site-header">
+    <a class="brand" href="index.html">Medical Ethics LMS</a>
+
+    <nav>
+        <a href="index.html">Courses</a>
+    </nav>
+</header>
+
+<main class="container">
+
+    <section class="hero compact">
+        <span class="eyebrow">COURSE</span>
+
+        <h1>Medical Ethics: Foundations</h1>
+
+        <p>
+            An introduction to medical ethics, ethical principles,
+            human dignity and moral responsibility in healthcare.
+        </p>
+    </section>
+
+    <section class="panel">
+        <h2>Lessons</h2>
+
+        <ol class="lesson-list">
+            <li>
+                <a href="lesson.html">
+                    Medical Ethics: Foundations
+                </a>
+            </li>
+        </ol>
+    </section>
+
+</main>
+
+<footer>
+    Medical Ethics LMS · Static demonstration hosted on GitHub Pages
+</footer>
+
+</body>
+</html>
