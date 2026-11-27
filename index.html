@@ -2,65 +2,46 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <meta name="description" content="A browser-based Medical Ethics Learning Management System demonstration.">
+  <title>Courses | Learning Platform</title>
 
-    <title>Medical Ethics LMS</title>
-
-    <link rel="stylesheet" href="static/css/style.css">
+  <link rel="stylesheet" href="static/css/style.css">
 </head>
-
 <body>
 
-    <header class="site-header">
-        <div class="container">
-            <h1>Medical Ethics LMS</h1>
-            <p>Learning. Reflection. Ethical Practice.</p>
-        </div>
-    </header>
+<header class="site-header">
+  <a class="brand" href="index.html">LEARNING PLATFORM</a>
+  <nav>
+    <a href="index.html">Courses</a>
+  </nav>
+</header>
 
-    <main class="container">
+<main class="container">
 
-        <section class="welcome-section">
-            <h2>Welcome to Medical Ethics Education</h2>
+  <section class="hero">
+    <span class="eyebrow">YOUR LEARNING SPACE</span>
+    <h1>Learn. Explore. Grow.</h1>
+    <p>A growing library of courses, lessons, videos and assessments.</p>
+  </section>
 
-            <p>
-                Explore educational lessons, examine ethical principles,
-                and test your understanding through interactive assessments.
-            </p>
-        </section>
+  <h2>Available courses</h2>
 
-        <section class="courses-section">
-            <h2>Available Courses</h2>
+  <div class="cards">
+    <article class="card">
+      <span class="pill">COURSE</span>
+      <h3>Medical Ethics</h3>
+      <p>Human dignity, moral responsibility and the value of life.</p>
+      <a class="button-link" href="course.html">Explore course</a>
+    </article>
+  </div>
 
-            <div id="course-list" class="course-grid">
-                <article class="course-card">
-                    <h3>Medical Ethics: Foundations</h3>
+</main>
 
-                    <p>
-                        An introduction to ethical principles and
-                        decision-making in healthcare.
-                    </p>
-
-                    <a href="lesson.html" class="button">
-                        Explore course
-                    </a>
-                </article>
-            </div>
-        </section>
-
-    </main>
-
-    <footer class="site-footer">
-        <div class="container">
-            <p>Medical Ethics LMS Demo</p>
-            <p>Educational project under development.</p>
-        </div>
-    </footer>
-
-    <script src="js/app.js"></script>
+<footer>
+  Learning Platform · Built with Python, Flask and SQLite
+</footer>
 
 </body>
 </html>
