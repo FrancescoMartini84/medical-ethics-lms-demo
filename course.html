@@ -1,1 +1,19 @@
-
+{% extends "base.html" %}
+{% block title %}{{ course.title }}{% endblock %}
+{% block content %}
+<section class="hero compact">
+  <span class="eyebrow">COURSE</span>
+  <h1>{{ course.title }}</h1>
+  <p>{{ course.description }}</p>
+</section>
+<section class="panel">
+  <h2>Lessons</h2>
+  <ol class="lesson-list">
+    {% for lesson in lessons %}
+      <li><a href="{{ url_for('lesson_detail', lesson_id=lesson.id) }}">{{ lesson.title }}</a></li>
+    {% else %}
+      <li>No lessons have been added yet.</li>
+    {% endfor %}
+  </ol>
+</section>
+{% endblock %}
