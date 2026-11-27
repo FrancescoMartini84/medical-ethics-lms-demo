@@ -1,1 +1,18 @@
+{% extends "base.html" %}
+{% block title %}Create account{% endblock %}
+{% block content %}
+<section class="form-card">
+  <h1>Create your student account</h1>
+  <p>Your assessment history will be saved to your account.</p>
+  <form method="post">
+    <input type="hidden" name="_csrf_token" value="{{ csrf_token() }}">
+    <label>Username<input name="username" minlength="3" required autocomplete="username"></label>
+    <label>Email<input type="email" name="email" required autocomplete="email"></label>
+    <label>Password<input type="password" name="password" minlength="10" required autocomplete="new-password"></label>
+    <p class="hint">Use at least 10 characters.</p>
+    <button type="submit">Create account</button>
+  </form>
+  <p>Already registered? <a href="{{ url_for('login') }}">Log in</a>.</p>
+</section>
+{% endblock %}
 
