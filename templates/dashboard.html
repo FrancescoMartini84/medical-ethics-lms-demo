@@ -1,1 +1,32 @@
+{% extends "base.html" %}
+{% block title %}My dashboard{% endblock %}
+{% block content %}
+<section class="hero compact">
+  <span class="eyebrow">STUDENT AREA</span>
+  <h1>My learning dashboard</h1>
+  <p>Your submitted assessments and saved results.</p>
+</section>
+<section class="panel">
+  <h2>Assessment history</h2>
+  {% if attempts %}
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Course</th><th>Lesson</th><th>Score</th><th>Submitted (UTC)</th></tr></thead>
+      <tbody>
+      {% for attempt in attempts %}
+        <tr>
+          <td>{{ attempt.course_title }}</td>
+          <td>{{ attempt.lesson_title }}</td>
+          <td>{{ attempt.score }}/{{ attempt.total }} ({{ "%.0f"|format(attempt.percentage) }}%)</td>
+          <td>{{ attempt.submitted_at[:19].replace("T", " ") }}</td>
+        </tr>
+      {% endfor %}
+      </tbody>
+    </table>
+  </div>
+  {% else %}
+    <p>You have not submitted an assessment yet. Visit a course to get started.</p>
+  {% endif %}
+</section>
+{% endblock %}
 
