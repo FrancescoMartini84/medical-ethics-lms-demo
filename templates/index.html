@@ -1,1 +1,22 @@
-
+{% extends "base.html" %}
+{% block title %}Courses | Learning Platform{% endblock %}
+{% block content %}
+<section class="hero">
+  <span class="eyebrow">YOUR LEARNING SPACE</span>
+  <h1>Learn. Explore. Grow.</h1>
+  <p>A growing library of courses, lessons, videos and assessments.</p>
+</section>
+<h2>Available courses</h2>
+<div class="cards">
+  {% for course in courses %}
+    <article class="card">
+      <span class="pill">COURSE</span>
+      <h3>{{ course.title }}</h3>
+      <p>{{ course.description }}</p>
+      <a class="button-link" href="{{ url_for('course_detail', slug=course.slug) }}">Explore course</a>
+    </article>
+  {% else %}
+    <p>No published courses yet.</p>
+  {% endfor %}
+</div>
+{% endblock %}
