@@ -1,1 +1,100 @@
+{% extends "base.html" %}
+{% block title %}{{ lesson.title }}{% endblock %}
+{% block content %}
+<div class="breadcrumb"><a href="{{ url_for('course_detail', slug=lesson.course_slug) }}">{{ lesson.course_title }}</a> / {{ lesson.title }}</div>
+<section class="hero compact">
+  <span class="eyebrow">LESSON {{ lesson.position }}</span>
+  <h1>{{ lesson.title }}</h1>
+  <p>Read the material, watch the videos and complete the assessment.</p>
+</section>
 
+<section class="panel lesson-content">
+  {{ lesson.content_html|safe }}
+</section>
+
+
+<section class="panel">
+  <h2>Video lessons</h2>
+  <p class="muted">Videos play here without navigating away from the LMS.</p>
+  <div class="video-grid">
+    <div>
+      <h3>The Oath of Hippocrates</h3>
+      <div class="video-frame">
+        <iframe
+          src="https://www.youtube-nocookie.com/embed/xzwfv89ULFw"
+          title="The Oath of Hippocrates"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+          referrerpolicy="strict-origin-when-cross-origin"
+          allowfullscreen>
+        </iframe>
+      </div>
+    </div>
+    <div>
+      <h3>CUHK - Ethical Principles</h3>
+      <div class="video-frame">
+        <iframe
+          src="https://www.youtube-nocookie.com/embed/xL-3VXs22hA"
+          title="CUHK - Ethical Principles"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+          referrerpolicy="strict-origin-when-cross-origin"
+          allowfullscreen>
+        </iframe>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<section class="panel" id="assessment">
+  <h2>Knowledge assessment</h2>
+  <p>Choose one answer for each question. You must be logged in to submit and save a result.</p>
+
+  {% if not session.get('user_id') %}
+    <div class="notice">
+      Please <a href="{{ url_for('login') }}">log in</a> or
+      <a href="{{ url_for('register') }}">create an account</a>
+      to take the assessment.
+    </div>
+
+  {% elif not assessment_allowed %}
+    <div class="notice">
+      Please verify your email address before taking the assessment.
+    </div>
+
+  {% else %}
+
+    {% if latest_attempt %}
+      <div class="result-card">
+        <h3>Your latest saved result</h3>
+        <strong>{{ latest_attempt.score }}/{{ latest_attempt.total }} — {{ "%.0f"|format(latest_attempt.percentage) }}%</strong>
+        <p>Submitted {{ latest_attempt.submitted_at[:19].replace("T", " ") }} UTC</p>
+      </div>
+    {% endif %}
+
+    <form method="post" action="{{ url_for('submit_assessment', lesson_id=lesson.id) }}" id="quiz-form">
+      <input type="hidden" name="_csrf_token" value="{{ csrf_token() }}">
+
+      {% for q in questions %}
+        <div class="question-card">
+          <h3>{{ loop.index }}. {{ q.prompt }}</h3>
+
+          {% for option_key, option_text in q.options.items() %}
+            <label>
+              <input
+                type="radio"
+                name="question_{{ q.id }}"
+                value="{{ option_key }}"
+                required
+              >
+              {{ option_key|upper }}. {{ option_text }}
+            </label>
+          {% endfor %}
+        </div>
+      {% endfor %}
+
+      <button type="submit">Submit and save assessment</button>
+    </form>
+
+  {% endif %}
+</section>
+{% endblock %}
